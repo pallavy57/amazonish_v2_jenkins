@@ -1,0 +1,12 @@
+django
+psycopg
+psycopg2-binary
+psycopg-binary
+graphene-django
+celery
+redis
+django-crontab
+apscheduler
+requests
+schedule
+pika

@@ -1,0 +1,32 @@
+---
+replicaCount: 1
+postgres:
+  name: amazonishv2
+  group: db
+  container:
+    image: pallavy57/amazonishapp_v2
+    port: 5432
+  service:
+    type: ClusterIP
+    port: 5432
+  volume:
+    name: postgres-storage
+    kind: PersistentVolumeClaim
+    mountPath: /var/lib/postgresql/data
+    pvc:
+      name: postgres-persistent-volume-claim
+      accessMode: ReadWriteOnce
+      storage: 4Gi
+configmap:
+  name: conf
+  enabled: true
+  values:
+    POSTGRES_DB: amazonish
+    POSTGRES_USER: pallavy
+    POSTGRES_PASSWORD: 123456789
+secrets:
+  enabled: true
+  values:
+    REDIS_PASS: redis@1234
+
+

@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./amazonish",
+        "./amazonish/amazonish"
+    ]
+}

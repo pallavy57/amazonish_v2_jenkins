@@ -1,0 +1,15 @@
+app:
+  name: amazonishv2app
+  group: backend
+  replicaCount: 1
+  container:
+    image: pallavy57/amazonishapp_v2
+    port: 8000
+    config:
+      - name: conf
+    env:
+       - key: DB_SERVER
+         value: amazonishv2
+  service:
+    type: ClusterIP
+    port: 80

@@ -1,0 +1,22 @@
+databaseType = "PostgreSql"
+name = "amazonish"
+id = "6be90106-6582-4613-94e5-37f81d526795"
+
+[flywayDesktop]
+developmentEnvironment = "development"
+shadowEnvironment = "shadow"
+schemaModel = "./schema-model"
+
+[redgateCompare]
+filterFile = "filter.rgf"
+
+[flyway]
+mixed = true
+outOfOrder = true
+locations = [ "filesystem:migrations" ]
+validateMigrationNaming = true
+
+[environments.amazonian]
+url = "jdbc:postgresql://postgresql-147036-0.cloudclusters.net:10023/amazonish"
+schemas = [ "public" ]
+displayName = "amazonish"

@@ -1,0 +1,12 @@
+{{- if .Values.configmap.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{toYaml .Values.configmap.name}}
+#   labels:
+#     group: {{toYaml .Values.postgres.group}}
+data:
+  {{- range $k, $v := .Values.configmap.values}}
+    {{toYaml $k}} : {{toYaml $v | quote}}
+  {{- end }} 
+{{- end}}  

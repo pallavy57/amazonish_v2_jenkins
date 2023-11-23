@@ -1,0 +1,21 @@
+ingress:
+  name: ingress-service
+  replicaCount: 1
+  annotations: 
+    class: nginx
+  hosts:
+    - host: amazonish.test
+      paths: 
+        - path: /
+          backend:
+            service:
+              name: amazonishv2app
+              port:
+                number: 8000  
+
+        # - path: /graphql
+        #   backend:
+        #     service:
+        #       name: amazonishv2app
+        #       port:
+        #         number: 8000           
