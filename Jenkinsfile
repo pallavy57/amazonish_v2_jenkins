@@ -1,4 +1,4 @@
-podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [ 
+podTemplate(label: 'mypod', serviceAccount: 'jenkins-ci', containers: [ 
     containerTemplate(
       name: 'docker', 
       image: 'docker', 
@@ -33,11 +33,11 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
 
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-    persistentVolumeClaim(
-      mountPath: '/usr/local/bin/helm', 
-      hostPath: '/usr/local/bin/helm', 
-      readOnly: false
-      )
+    // persistentVolumeClaim(
+    //   mountPath: '/usr/local/bin/helm', 
+    //   hostPath: '/usr/local/bin/helm', 
+    //   readOnly: false
+    //   )
     //hostPathVolume(mountPath: '/usr/local/bin/helm', hostPath: '/usr/local/bin/helm', accessModes: RWO)
   ]
   ) {

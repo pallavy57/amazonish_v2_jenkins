@@ -1,14 +1,14 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: cd-jenkins
+  name: jenkins-ci
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: service-reader
 subjects:
 - kind: ServiceAccount
-  name: cd-jenkins
+  name: jenkins-ci
   namespace: default
 
 ---
