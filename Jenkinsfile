@@ -21,7 +21,7 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
     ),
     containerTemplate(
       name: 'helm', 
-      image: 'alpine/helm:latest', 
+      image: 'alpine/helm:3.13.2', 
       resourceRequestCpu: '100m',
       resourceLimitCpu: '300m',
       resourceRequestMemory: '300Mi',
@@ -61,7 +61,7 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
                 sh 'kubectl get pods -n default'  
             }
             container('helm') { 
-                // sh 'helm init'
+                sh 'helm repo add stable https://charts.helm.sh/stable'
                 sh 'helm repo update'     
             }
         }  
