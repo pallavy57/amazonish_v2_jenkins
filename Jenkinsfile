@@ -61,7 +61,7 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
                 sh 'kubectl get pods -n default'  
             }
             container('helm') { 
-                sh 'helm init'
+                // sh 'helm init'
                 sh 'helm repo update'     
             }
         }  
