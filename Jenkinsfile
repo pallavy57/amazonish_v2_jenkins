@@ -44,8 +44,12 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
     node('mypod') {
 
         def REPOSITORY_URI = "pallavy57/amazonishapp_v2"
-        def HELM_APP_NAME = "amazonishv2jenkins"
-        def HELM_CHART_DIRECTORY = "helm/ingress"
+        def HELM_APP_NAME_1 = "amazonishv2"
+        def HELM_CHART_DIRECTORY_1 = "helm/postgres"
+        def HELM_APP_NAME_2 = "amazonishv2app"
+        def HELM_CHART_DIRECTORY_2 = "helm/app"
+        def HELM_APP_NAME_3 = "ingress-service"
+        def HELM_CHART_DIRECTORY_3 = "helm/ingress"
 
         stage('Get latest version of code') {
           checkout scm
@@ -95,12 +99,30 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
             }
         }
 
+        stage('Deploy postgres helm chart to k8s'){
+            container('helm'){
+                sh 'helm list'
+                sh "helm lint ./${HELM_CHART_DIRECTORY_1}"
+                sh "helm upgrade --set image.tag=${BUILD_NUMBER} ${HELM_APP_NAME_1} ./${HELM_CHART_DIRECTORY_1}"
+                sh "helm list | grep ${HELM_APP_NAME_1}"
+            }
+        }   
+
+        stage('Deploy app helm chart to k8s'){
+            container('helm'){
+                sh 'helm list'
+                sh "helm lint ./${HELM_CHART_DIRECTORY_2}"
+                sh "helm upgrade --set image.tag=${BUILD_NUMBER} ${HELM_APP_NAME_2} ./${HELM_CHART_DIRECTORY_2}"
+                sh "helm list | grep ${HELM_APP_NAME_2}"
+            }
+        }   
+
         stage('Deploy Image to k8s'){
             container('helm'){
                 sh 'helm list'
-                sh "helm lint ./${HELM_CHART_DIRECTORY}"
-                sh "helm upgrade --set image.tag=${BUILD_NUMBER} ${HELM_APP_NAME} ./${HELM_CHART_DIRECTORY}"
-                sh "helm list | grep ${HELM_APP_NAME}"
+                sh "helm lint ./${HELM_CHART_DIRECTORY_3}"
+                sh "helm upgrade --set image.tag=${BUILD_NUMBER} ${HELM_APP_NAME_3} ./${HELM_CHART_DIRECTORY_3}"
+                sh "helm list | grep ${HELM_APP_NAME_3}"
             }
         }      
     }
