@@ -44,7 +44,7 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
     node('mypod') {
 
         def REPOSITORY_URI = "pallavy57/amazonishapp_v2"
-        def HELM_APP_NAME = "amazonish_v2_jenkins"
+        def HELM_APP_NAME = "amazonishv2jenkins"
         def HELM_CHART_DIRECTORY = "helm/ingress"
 
         stage('Get latest version of code') {
@@ -99,7 +99,7 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
             container('helm'){
                 sh 'helm list'
                 sh "helm lint ./${HELM_CHART_DIRECTORY}"
-                sh "helm upgrade --wait --timeout 60 --set image.tag=${BUILD_NUMBER} ${HELM_APP_NAME} ./${HELM_CHART_DIRECTORY}"
+                sh "helm upgrade --set image.tag=${BUILD_NUMBER} ${HELM_APP_NAME} ./${HELM_CHART_DIRECTORY}"
                 sh "helm list | grep ${HELM_APP_NAME}"
             }
         }      
