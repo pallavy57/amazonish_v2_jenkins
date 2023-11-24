@@ -88,7 +88,7 @@ podTemplate(label: 'mypod', serviceAccount: 'cd-jenkins', containers: [
 
         stage('Push Image'){
             container('docker'){
-              withCredentials([usernamePassword(credentialsId: 'docker-login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+              withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 sh 'docker image ls'
                 sh "docker push ${REPOSITORY_URI}:${BUILD_NUMBER}"
               }                 
