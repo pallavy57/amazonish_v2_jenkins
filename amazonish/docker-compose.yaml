@@ -13,7 +13,7 @@ services:
     - "host.docker.internal:host-gateway"
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ../Dockerfile
     ports:
       - "8000:8000"
     environment:
