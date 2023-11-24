@@ -30,7 +30,7 @@ services:
   celery:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ../Dockerfile
     command: celery --app=amazonish worker --loglevel=info --logfile=logs/celery.log  
   
     volumes:
